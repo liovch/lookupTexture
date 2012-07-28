@@ -18,6 +18,7 @@ int makeLookupImage()
 {
     QImage image(512, 512, QImage::Format_RGB888);
 
+    // TODO: There is a small aliasing problem.
     for (int by = 0; by < 8; by++) {
         for (int bx = 0; bx < 8; bx++) {
             for (int g = 0; g < 64; g++) {
