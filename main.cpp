@@ -1,9 +1,21 @@
 #include <QImage>
 
-int main(int argc, char *argv[])
+int makeGradientImage()
 {
-    Q_UNUSED(argc);
-    Q_UNUSED(argv);
+    QImage image(720, 960, QImage::Format_RGB888);
+
+    for (int h = 0; h < image.height(); h++) {
+        for (int w = 0; w < image.width(); w++) {
+            image.setPixel(w, h, qRgb(h * 255.0 / (image.height() - 1),
+                                      h * 255.0 / (image.height() - 1),
+                                      h * 255.0 / (image.height() - 1)));
+        }
+    }
+    image.save("gradient.png");
+}
+
+int makeLookupImage()
+{
     QImage image(512, 512, QImage::Format_RGB888);
 
     for (int by = 0; by < 8; by++) {
@@ -18,6 +30,14 @@ int main(int argc, char *argv[])
         }
     }
     image.save("lookup.png");
+}
+
+int main(int argc, char *argv[])
+{
+    Q_UNUSED(argc);
+    Q_UNUSED(argv);
+    makeGradientImage();
+    makeLookupImage();
 
     return 0;
 }
